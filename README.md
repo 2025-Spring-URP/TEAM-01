@@ -14,7 +14,7 @@ AXI4 기반으로 IO가 어떻게 들어오는 지 분석
     logic   [3:0]                       aregion;  // 지역(region) 속성
    해당 변수들은 사용하지 않을 예정!!
 
-   write 명령인 경우 clock 별 input 값 정리
+   write 명령인 경우 clock 별 input 값 정리(우선 여기서 헤더 부분에 필요한 부분만 만들어서 TLP를 만들기 - TLP 담당자에게 의견 전달 필요)
    ![image](https://github.com/user-attachments/assets/f49a55bb-74fe-4134-830f-ad6e73b73827)
 
 
