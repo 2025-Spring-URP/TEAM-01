@@ -16,9 +16,11 @@ AXI4 기반으로 IO가 어떻게 들어오는 지 분석
 
    write 명령인 경우 clock 별 input 값 정리(우선 여기서 헤더 부분에 필요한 부분만 만들어서 TLP를 만들기 - TLP 담당자에게 의견 전달 필요)
    (또한, cycle의 경우 한 rising edge를 의미하는 건 아니고 vaild가 할당되었을 경우에 다음 사이클로 넘어가는 구조)
+   
    ![image](https://github.com/user-attachments/assets/f49a55bb-74fe-4134-830f-ad6e73b73827)
 
    read 명령인 경우 clock 별 input 값 정리(마찬가지로 cycle의 경우 한 rising edge를 의미하는 건 아니고 vaild가 할당되었을 경우에 다음 사이클로 넘어가는 구조)
+   
    ![image](https://github.com/user-attachments/assets/19b8dfb8-3945-4e74-a553-a3b4f0f94573)
 
 
