@@ -1,16 +1,16 @@
 class monitor;
 
-  input  logic clk;
-  input  logic rst_n;
+  logic clk;
+  logic rst_n;
 
   // DUT 출력 연결
-  input  logic         out_valid;
-  output logic         out_ready;
-  input  logic [31:0]  out_addr;
-  input  logic [7:0]   out_length;
-  input  logic [15:0]  out_bdf;
-  input  logic         out_is_memwrite;
-  input  logic [1023:0] out_wdata;
+  logic         out_valid;
+  logic         out_ready;
+  logic [31:0]  out_addr;
+  logic [7:0]   out_length;
+  logic [15:0]  out_bdf;
+  logic         out_is_memwrite;
+  logic [1023:0] out_wdata;
 
   mailbox scb_mbx;
 
