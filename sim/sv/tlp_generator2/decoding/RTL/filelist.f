@@ -1,0 +1,2 @@
+-sverilog $LAB_PATH/RTL/AXI4_IF.sv
+-sverilog $LAB_PATH/RTL/dummy_top.sv

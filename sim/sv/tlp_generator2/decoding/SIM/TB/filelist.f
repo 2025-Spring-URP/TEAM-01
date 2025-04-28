@@ -1,0 +1,2 @@
+-sverilog ../../RTL/PCIE_PKG.svh
+-sverilog $LAB_PATH/SIM/TB/top_tb.sv
