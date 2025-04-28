@@ -27,10 +27,10 @@ module FC_RX_Controller_Top (
     //============================================================
     // 내부 연결 신호 (wires)
     //============================================================
-    logic [7:0] ca_hdr, ca_data;
-    logic [7:0] free_hdr_credit;
-    logic [7:0] free_data_credit;
-    logic       updatefc_trigger;
+    logic [7:0] ca_hdr, ca_data;    // credit Allocator에서 할당된 header와 Data credit
+    logic [7:0] free_hdr_credit;    // buffer의 남은 header credit
+    logic [7:0] free_data_credit;   // buffer의 남은 data credit
+    logic       updatefc_trigger;   // Credit Allocator에서 UpdateFC를 요청하는 신호
 
     //============================================================
     // 서브모듈 인스턴스화

@@ -33,9 +33,9 @@ module FC_TX_Controller_Top (
     //============================================================
     logic [7:0] cl_hdr, cl_data;
     logic [7:0] cc_hdr, cc_data;
-    logic       gating_pass;
-    logic [7:0] required_hdr_credit;
-    logic [7:0] required_data_credit;
+    logic       gating_pass;            // gating logic을 통과했는지 여부
+    logic [7:0] required_hdr_credit;    // TLP 송신시 필요 Header Credit 소모량
+    logic [7:0] required_data_credit;   // TLP 송신시 필요 Data Credit 소모량
 
     //============================================================
     // 서브모듈 인스턴스화
@@ -94,12 +94,9 @@ module FC_TX_Controller_Top (
     fc_tx_link_packet_ctrl u_fc_tx_link_packet_ctrl (
         .initfc_valid_i       (initfc_valid_i),
         .updatefc_valid_i     (updatefc_valid_i)
-        // (이 모듈은 InitFC/UpdateFC 수신 여부에 따라 신호 정리하는 용도 - 선택사항)
+        // 이 모듈은 InitFC/UpdateFC 수신 여부에 따라 신호 정리하는 용도
     );
 
-    //============================================================
-    // 최종 연결
-    //============================================================
     assign send_tlp_grant_o = send_tlp_req_i && gating_pass;
 
 endmodule
