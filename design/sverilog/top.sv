@@ -1,117 +1,167 @@
 `timescale 1ns/1ps
 
-//write까지 구현 완료
+import PCIE_PKG::*;
 
 module top #(
-    parameter ID_WIDTH   = 4,   //id가 따로 의미가 있진 않다고 하셨음음
-    parameter ADDR_WIDTH = 32, //주소는 32로 고정한다고 생각각
-    parameter DATA_WIDTH = 256,
-    parameter CHUNK_MAX_BEATS = 4 //32B씩 128B까지 받을 수 있음음
+    parameter ID_WIDTH        = 4,
+    parameter ADDR_WIDTH      = 32,
+    parameter DATA_WIDTH      = 256,
+    parameter CHUNK_MAX_BEATS = 4   // 한번에 32B × 4 = 128B 처리
 )(
-    
     input  wire                          clk,
     input  wire                          rst_n,
 
-    // ------------------------------------------------------------------------
-    // AXI Write Address (AW) 신호들
-    //  - master → slave 방향
-    // ------------------------------------------------------------------------
-    input  wire                          awvalid_in,   // 주소 valid
-    output wire                          awready_out,  // 주소 ready
-    input  wire [ID_WIDTH-1:0]          awid_in,
-    input  wire [ADDR_WIDTH-1:0]        awaddr_in,
-    input  wire [7:0]                   awlen_in,   //wdata를 몇 번 보낼 지 알려줌 3이면 4번 보내줌
-    input  wire [2:0]                   awsize_in,  //wdata의 사이즈를 지정 우린 2^5로 고정할 듯듯
-    input  wire [1:0]                   awburst_in, //burst 타입인데 increse라서 우리는 주소를 n씩 증가시킬거임
-    // 필요하면 acache, aprot, aqos, aregion 등을 추가 포트로 두어도 됨
+    // Write Address (AW) 채널
+    input  wire                          awvalid_in,
+    output wire                          awready_out,
+    input  wire [ID_WIDTH-1:0]           awid_in,
+    input  wire [ADDR_WIDTH-1:0]         awaddr_in,
+    input  wire [7:0]                    awlen_in,
+    input  wire [2:0]                    awsize_in,
+    input  wire [1:0]                    awburst_in,
 
-    // ------------------------------------------------------------------------
-    // AXI Write Data (W) 신호들
-    //  - master → slave
-    // ------------------------------------------------------------------------
-    input  wire                          wvalid_in,    // Write data valid
-    output wire                          wready_out,   // Write data ready
-    input  wire [DATA_WIDTH-1:0]        wdata_in,   //32B 즉 256bit씩 wdata가 들어옴옴
-    // wstrb 등도 필요하면 추가인데 우리는 안쓸 거임임
-    input  wire                          wlast_in,  //한 명령에 대한 마지막 wdata가 들어오면 신호 인가
+    // Write Data (W) 채널
+    input  wire                          wvalid_in,
+    output wire                          wready_out,
+    input  wire [DATA_WIDTH-1:0]         wdata_in,
+    input  wire                          wlast_in,
 
-    // ------------------------------------------------------------------------
-    // 디코딩 결과 출력(이 모듈에서 생성) 여기는 write 부분의 아웃풋과 인풋만 정의됨 아마 read인 경우 값이 좀 더 추가될 수도?
-    // ------------------------------------------------------------------------
-    output wire [ADDR_WIDTH-1:0]        out_addr,
-    output wire [7:0]                   out_length,
-    output wire [15:0]                  out_bdf,
-    output wire                         out_is_memwrite,
-    output wire [DATA_WIDTH*CHUNK_MAX_BEATS-1:0] out_wdata,
-    output wire                         out_valid,
-    input  wire                         out_ready
+    // Read Address (AR) 채널
+    input  wire                          arvalid_in,
+    output wire                          arready_out,
+    input  wire [ID_WIDTH-1:0]           arid_in,
+    input  wire [ADDR_WIDTH-1:0]         araddr_in,
+    input  wire [7:0]                    arlen_in,
+    input  wire [2:0]                    arsize_in,
+    input  wire [1:0]                    arburst_in
 );
 
-    // ------------------------------------------------------------------------
-    // 1) AXI 인터페이스 인스턴스화
-    //   : SystemVerilog interface를 Top 내부에서 하나씩 만든다.
-    // ------------------------------------------------------------------------
+    //----------------------------------------------------------------------
+    // 1) AXI4 인터페이스 인스턴스 연결
+    //----------------------------------------------------------------------
+
+    // Write Address (AW)
     AXI4_A_IF #(ID_WIDTH, ADDR_WIDTH) i_axi_aw (
         .aclk     (clk),
         .areset_n (rst_n)
     );
+    assign i_axi_aw.avalid = awvalid_in;
+    assign i_axi_aw.aid    = awid_in;
+    assign i_axi_aw.aaddr  = awaddr_in;
+    assign i_axi_aw.alen   = awlen_in;
+    assign i_axi_aw.asize  = awsize_in;
+    assign i_axi_aw.aburst = awburst_in;
+    assign awready_out     = i_axi_aw.aready;
 
+    // Write Data (W)
     AXI4_W_IF #(ID_WIDTH, DATA_WIDTH) i_axi_w (
         .aclk     (clk),
         .areset_n (rst_n)
     );
+    assign i_axi_w.wvalid = wvalid_in;
+    assign i_axi_w.wdata  = wdata_in;
+    assign i_axi_w.wlast  = wlast_in;
+    assign wready_out     = i_axi_w.wready;
 
-    // ------------------------------------------------------------------------
-    // 2) Top 레벨 포트와 Interface 신호들 연결 (배선)
-    //    - AW쪽: (master→slave) 방향
-    // ------------------------------------------------------------------------
-    // AW valid, ID, addr, len, etc. -> i_axi_aw.(avalid, aid, aaddr, ...)
-    assign i_axi_aw.avalid  = awvalid_in;
-    assign i_axi_aw.aid     = awid_in;
-    assign i_axi_aw.aaddr   = awaddr_in;
-    assign i_axi_aw.alen    = awlen_in;
-    assign i_axi_aw.asize   = awsize_in;
-    assign i_axi_aw.aburst  = awburst_in;
-    // acache, aprot, aqos, aregion 등을 쓰려면 비슷하게 assign
+    // Read Address (AR)
+    AXI4_A_IF #(ID_WIDTH, ADDR_WIDTH) i_axi_ar (
+        .aclk     (clk),
+        .areset_n (rst_n)
+    );
+    assign i_axi_ar.avalid = arvalid_in;
+    assign i_axi_ar.aid    = arid_in;
+    assign i_axi_ar.aaddr  = araddr_in;
+    assign i_axi_ar.alen   = arlen_in;
+    assign i_axi_ar.asize  = arsize_in;
+    assign i_axi_ar.aburst = arburst_in;
+    assign arready_out     = i_axi_ar.aready;
 
-    // slave 출력(aready)을 top 포트로
-    assign awready_out      = i_axi_aw.aready;
+    //----------------------------------------------------------------------
+    // 2) AXI 디코딩 결과 연결
+    //----------------------------------------------------------------------
 
-    // ------------------------------------------------------------------------
-    // 3) W쪽: (master→slave) 방향
-    // ------------------------------------------------------------------------
-    assign i_axi_w.wvalid   = wvalid_in;
-    assign i_axi_w.wdata    = wdata_in;
-    assign i_axi_w.wlast    = wlast_in;
-    // wstrb, etc.
+    // Write 요청 디코딩 결과
+    wire [ADDR_WIDTH-1:0] out_w_addr;
+    wire [7:0]            out_w_length;
+    wire [15:0]           out_w_bdf;
+    wire [DATA_WIDTH*CHUNK_MAX_BEATS-1:0] out_w_data;
+    wire                  out_w_valid;
+    wire                  out_w_ready;
 
-    assign wready_out       = i_axi_w.wready;
+    // Read 요청 디코딩 결과
+    wire [ADDR_WIDTH-1:0] out_r_addr;
+    wire [7:0]            out_r_length;
+    wire                  out_r_valid;
+    wire                  out_r_ready;
 
-    // ------------------------------------------------------------------------
-    // 4) 디코딩 모듈 인스턴스 (axi4_if_decoding)
-    //    - 이 모듈이 AW/W 인터페이스의 slave modport를 받아서 동작
-    // ------------------------------------------------------------------------
+    // AXI 요청 -> 내부 형식으로 변환
     axi4_if_decoding #(
         .ID_WIDTH       (ID_WIDTH),
         .ADDR_WIDTH     (ADDR_WIDTH),
         .DATA_WIDTH     (DATA_WIDTH),
         .CHUNK_MAX_BEATS(CHUNK_MAX_BEATS)
     ) dec_inst (
-        .clk       (clk),
-        .rst_n     (rst_n),
-
-        // slave modport 연결
-        .s_axi_aw  (i_axi_aw.slave),
-        .s_axi_w   (i_axi_w.slave),
-
-        // 출력
-        .out_addr       (out_addr),
-        .out_length     (out_length),
-        .out_bdf        (out_bdf),
-        .out_is_memwrite(out_is_memwrite),
-        .out_wdata      (out_wdata),
-        .out_valid      (out_valid),
-        .out_ready      (out_ready)
+        .clk           (clk),
+        .rst_n         (rst_n),
+        .s_axi_aw      (i_axi_aw.slave),
+        .s_axi_w       (i_axi_w.slave),
+        .out_w_addr    (out_w_addr),
+        .out_w_length  (out_w_length),
+        .out_w_bdf     (out_w_bdf),
+        .out_w_data    (out_w_data),
+        .out_w_valid   (out_w_valid),
+        .out_w_ready   (out_w_ready),
+        .s_axi_ar      (i_axi_ar.slave),
+        .out_r_addr    (out_r_addr),
+        .out_r_length  (out_r_length),
+        .out_r_valid   (out_r_valid),
+        .out_r_ready   (out_r_ready)
     );
+
+    //----------------------------------------------------------------------
+    // 3) 디코딩 결과 → TLP 생성 연결
+    //----------------------------------------------------------------------
+
+    // 핸드셰이크 신호임 디코딩 측에서 tlp gen측과 핸드셰이크 용도. 
+    logic in_w_ready, in_r_ready;
+
+    // TLP 출력 신호
+    logic [DATA_WIDTH*CHUNK_MAX_BEATS + $bits(tlp_memory_req_header)-1:0] tlp_out;
+    logic [DATA_WIDTH*CHUNK_MAX_BEATS-1:0]                                tlp_payload_out;
+    tlp_memory_req_header                                                 tlp_hdr_out;
+    logic                                                                 tlp_valid;
+
+    // 디코딩 → TLP 생성 모듈 연결 (ready 연결)
+    assign out_w_ready = in_w_ready;
+    assign out_r_ready = in_r_ready;
+
+    // 디코딩된 정보를 기반으로 PCIe TLP 패킷 생성
+    pcie_tlp_gen #(
+        .ID_WIDTH       (ID_WIDTH),
+        .ADDR_WIDTH     (ADDR_WIDTH),
+        .DATA_WIDTH     (DATA_WIDTH),
+        .CHUNK_MAX_BEATS(CHUNK_MAX_BEATS)
+    ) pcie_tlp_gen_inst (
+        .clk              (clk),
+        .rst_n            (rst_n),
+        .in_w_addr        (out_w_addr),
+        .in_w_length      (out_w_length),
+        .in_w_bdf         (out_w_bdf),
+        .in_w_data        (out_w_data),
+        .in_w_valid       (out_w_valid),
+        .in_w_ready       (in_w_ready),
+        .in_r_addr        (out_r_addr),
+        .in_r_length      (out_r_length),
+        .in_r_valid       (out_r_valid),
+        .in_r_ready       (in_r_ready),
+        .tlp_hdr_out      (tlp_hdr_out),
+        .tlp_payload_out  (tlp_payload_out),
+        .tlp_out          (tlp_out),
+        .tlp_valid        (tlp_valid)
+    );
+
+    //----------------------------------------------------------------------
+    // 4) (TODO) TLP PHY 연결 예정
+    //----------------------------------------------------------------------
 
 endmodule

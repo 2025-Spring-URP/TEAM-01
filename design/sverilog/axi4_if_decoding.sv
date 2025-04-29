@@ -1,173 +1,151 @@
 `timescale 1ns/1ps
 
+
+//R이나 B는 아직 여기에 구현된 게 아님. 나중에 RX단 처리할 때 구현할 생각임.
+
 module axi4_if_decoding #(
-    parameter ID_WIDTH         = 4,
-    parameter ADDR_WIDTH       = 32,
-    parameter DATA_WIDTH       = 256,
-    parameter CHUNK_MAX_BEATS  = 4   // 최대 몇 beat 모아서 한 덩어리(chunk)로 전송?
+  parameter ID_WIDTH        = 4,
+  parameter ADDR_WIDTH      = 32,
+  parameter DATA_WIDTH      = 256,
+  parameter CHUNK_MAX_BEATS = 4
 )(
-    input  wire clk,
-    input  wire rst_n,
+  input  wire                        clk,
+  input  wire                        rst_n,
 
-    // AXI Write Address / Write Data 채널( slave modport )
-    AXI4_A_IF.slave s_axi_aw,
-    AXI4_W_IF.slave s_axi_w,
+  // Write 어드레스/데이터 슬레이브 포트
+  AXI4_A_IF.slave                    s_axi_aw,
+  AXI4_W_IF.slave                    s_axi_w,
 
-    // 디코딩 결과 출력 (TLP 등으로 패킷화할 때 사용한다고 가정)
-    output logic [ADDR_WIDTH-1:0]                  out_addr,
-    output logic [7:0]                             out_length,    // 단위: DW(4 Byte)
-    output logic [15:0]                            out_bdf,
-    output logic                                   out_is_memwrite,
-    output logic [DATA_WIDTH*CHUNK_MAX_BEATS-1:0]  out_wdata,
-    output logic                                   out_valid,
-    input  logic                                   out_ready
+  // Read 어드레스 슬레이브 포트
+  AXI4_A_IF.slave                    s_axi_ar,
+
+  // Write용 TLP로 보낼 포트
+  output logic [ADDR_WIDTH-1:0]                out_w_addr,
+  output logic [7:0]                           out_w_length,
+  output logic [15:0]                          out_w_bdf,
+  output logic [DATA_WIDTH*CHUNK_MAX_BEATS-1:0] out_w_data,
+  output logic                                 out_w_valid,
+  input  logic                                 out_w_ready,
+
+  // Read용 TLP로 보낼 포트
+  output logic [ADDR_WIDTH-1:0]                out_r_addr,
+  output logic [7:0]                           out_r_length,
+  output logic                                 out_r_valid,
+  input  logic                                 out_r_ready
 );
 
-    //--------------------------------------------------------------------------
-    // 1) 상수/상태 변수
-    //--------------------------------------------------------------------------
-    localparam logic [15:0] DEVICE_BDF = 16'h0200;  // 예시로 고정한 BDF ID
+  // 고정으로 박아놓는 BDF
+  localparam logic [15:0] DEVICE_BDF = 16'h0200;
 
-    // Address 보관
-    logic [ADDR_WIDTH-1:0] awaddr_reg;
-    logic [7:0]            awlen_reg;      // alen=(beat수-1)
-    logic [ID_WIDTH-1:0]   awid_reg;
-    logic                  awvalid_reg;    
-    logic                  awready_r;
+  // Write 쪽에 필요한 레지스터들
+  logic [ADDR_WIDTH-1:0] awaddr_reg;
+  logic [7:0]            awlen_reg;
+  logic                  aw_received;
+  logic [DATA_WIDTH-1:0] chunk_buf [0:CHUNK_MAX_BEATS-1];
+  logic [2:0]            chunk_count;
+  logic [ADDR_WIDTH-1:0] chunk_offset;
+  logic                  awready_r, wready_r;
+  logic                  out_w_valid_reg;
+  logic [7:0]            beats_left;
 
-    // "AW valid 받음" 플래그와 남은 beat 수
-    logic                  aw_valid_received; 
-    logic [7:0]            beats_left; // = awlen_reg + 1
+  // Read 쪽에 필요한 레지스터들
+  logic [ADDR_WIDTH-1:0] araddr_reg;
+  logic [7:0]            arlen_reg;
+  logic                  ar_received;
+  logic                  arready_r;
 
-    // Write data 수신 버퍼
-    logic [ADDR_WIDTH-1:0] chunk_offset;
-    logic [DATA_WIDTH-1:0] chunk_buf [0:CHUNK_MAX_BEATS-1];
-    logic [2:0]            chunk_count;  // 현재까지 모은 beat 수(0~CHUNK_MAX_BEATS)
-    logic                  wready_r;
+  //-------------------------------------------------------------------------
+  // Write랑 Read 처리하는 메인 always 블록
+  //-------------------------------------------------------------------------
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      // 리셋 걸리면 전부 초기화
+      awaddr_reg     <= '0;
+      awlen_reg      <= '0;
+      aw_received    <= 1'b0;
+      beats_left     <= '0;
+      chunk_count    <= '0;
+      chunk_offset   <= '0;
+      out_w_valid_reg<= 1'b0;
+      awready_r      <= 1'b0;
+      wready_r       <= 1'b0;
+      for (int i = 0; i < CHUNK_MAX_BEATS; i++) begin
+        chunk_buf[i] <= '0;
+      end
+      araddr_reg   <= '0;
+      arlen_reg    <= '0;
+      ar_received  <= 1'b0;
+      arready_r    <= 1'b0;
+    end else begin
+      // ------------ Write 채널 처리 -------------
+      awready_r <= !aw_received;   // 아직 AW 안받았으면 ready
+      wready_r  <= aw_received;    // AW 받고 나면 W 데이터 받기
 
-    // handshake, out_valid 제어
-    logic                  out_valid_reg;
+      // AW 핸드셰이크 (주소 받고)
+      if (s_axi_aw.avalid && awready_r) begin
+        awaddr_reg     <= s_axi_aw.aaddr;
+        awlen_reg      <= s_axi_aw.alen;
+        aw_received    <= 1'b1;
+        beats_left     <= s_axi_aw.alen + 1;
+      end
 
-    //--------------------------------------------------------------------------
-    // 2) Address Channel (AW)
-    //--------------------------------------------------------------------------
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            awready_r        <= 1'b0;
-            awvalid_reg      <= 1'b0;
-            awaddr_reg       <= '0;
-            awlen_reg        <= '0;
-            awid_reg         <= '0;
-            aw_valid_received<= 1'b0;
-            beats_left       <= '0;
+      // W 데이터 모으기
+      if (s_axi_w.wvalid && wready_r) begin
+        chunk_buf[chunk_count] <= s_axi_w.wdata;
+        chunk_count            <= chunk_count + 1;
+        beats_left             <= beats_left - 1;
+        // 버퍼가 다 찼거나, 마지막 데이터거나, 남은게 하나뿐이면 내보낼 준비
+        if ((chunk_count + 1 == CHUNK_MAX_BEATS) || s_axi_w.wlast || (beats_left == 1)) begin
+          out_w_valid_reg <= 1'b1;
         end
-        else begin
-            // 간단히 always ready = 1 (버퍼 여유 있다고 가정)
-            awready_r <= 1'b1;
+      end
 
-            // 새 Burst 수신
-            if (s_axi_aw.avalid && s_axi_aw.aready) begin
-                awvalid_reg       <= 1'b1; 
-                awaddr_reg        <= s_axi_aw.aaddr;
-                awlen_reg         <= s_axi_aw.alen;    // alen=(beat수-1)
-                awid_reg          <= s_axi_aw.aid;
-                aw_valid_received <= 1'b1;             // W 수신 준비
-                beats_left        <= s_axi_aw.alen + 1; // (beat수 -1) +1 = beat수
-            end
+      // 출력 handshake
+      if (out_w_valid_reg && out_w_ready) begin
+        out_w_valid_reg <= 1'b0;
+        chunk_offset    <= chunk_offset + (chunk_count * (DATA_WIDTH/8));
+        chunk_count     <= '0;
+      end
 
-            // 만약 burst가 끝났으면(아래 W 채널에서 beats_left=0 → end)
-            // 다시 AW 수신 대기 상태로 돌려놓음
-            if (beats_left == 0) begin
-                aw_valid_received <= 1'b0;
-            end
-        end
+      // 다 보내고 나면 AW 다시 받을 수 있게
+      if (beats_left == 0)
+        aw_received <= 1'b0;
+
+      // ------------ Read 채널 처리 ------------
+      arready_r <= !ar_received;   // 아직 AR 안받았으면 ready
+
+      // AR 핸드셰이크 (읽을 주소 받고)
+      if (s_axi_ar.avalid && arready_r) begin
+        araddr_reg  <= s_axi_ar.aaddr;
+        arlen_reg   <= s_axi_ar.alen;
+        ar_received <= 1'b1;
+      end
+
+      // 읽기 요청 내보냈으면 다시 초기화
+      if (ar_received && out_r_ready) begin
+        ar_received <= 1'b0;
+      end
     end
+  end
 
-    assign s_axi_aw.aready = awready_r;
+  //-------------------------------------------------------------------------
+  // 외부로 내보내는 출력들
+  //-------------------------------------------------------------------------
+  // AXI ready 신호
+  assign s_axi_aw.aready = awready_r;
+  assign s_axi_w.wready  = wready_r;
+  assign s_axi_ar.aready = arready_r;
 
-    //--------------------------------------------------------------------------
-    // 3) Write Data Channel (W) + chunk 관리
-    //--------------------------------------------------------------------------
-    //  - AW handshake 완료(aw_valid_received=1) 후에야 W 데이터를 수신
-    //  - beats_left 관리 (alen+1번 받으면 해당 burst 끝)
-    //  - chunk_count == CHUNK_MAX_BEATS → out_valid
-    //  - leftover(wlast나 beats_left=0) → out_valid
-    //--------------------------------------------------------------------------
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            wready_r        <= 1'b0;
-            out_valid_reg   <= 1'b0;
-            chunk_count     <= 0;
-            chunk_offset    <= 0;
-        end
-        else begin
-            // Wready = 1 iff aw_valid_received=1 (즉, 주소를 받은 상태)
-            wready_r <= aw_valid_received;
+  // Write쪽 출력
+  assign out_w_addr   = awaddr_reg + chunk_offset;
+  assign out_w_length = chunk_count;
+  assign out_w_bdf    = DEVICE_BDF;
+  assign out_w_data   = {chunk_buf[3], chunk_buf[2], chunk_buf[1], chunk_buf[0]}; // 큰 데이터부터 붙임
+  assign out_w_valid  = out_w_valid_reg;
 
-            // out_valid=1 → out_ready=1 핸드셰이크 되면 전송 끝
-            if (out_valid_reg && out_ready) begin
-                out_valid_reg <= 1'b0;
-                // chunk_offset += (chunk_count×32 Byte)
-                //   (DATA_WIDTH=256 → 32Byte per beat)
-                chunk_offset <= chunk_offset + (chunk_count*32);
-                chunk_count  <= 0;
-            end
-
-            // W data handshake
-            if (s_axi_w.wvalid && wready_r) begin
-                // 수신
-                chunk_buf[chunk_count] <= s_axi_w.wdata;
-                chunk_count            <= chunk_count + 1;
-
-                // 남은 beat 1줄임
-                beats_left <= (beats_left - 1);
-
-                // (1) 4 beat 꽉 찼으면 out_valid 올림
-                if (chunk_count + 1 == CHUNK_MAX_BEATS) begin
-                    out_valid_reg <= 1'b1;
-                end
-
-                // (2) leftover 발생조건: wlast=1이거나 beats_left==1
-                //     → 이번 beat가 마지막임 => out_valid=1
-                //     (단, 이미 (1)에서 CHUNK_MAX_BEATS 꽉 찼으면 거기서 out_valid=1)
-                if (s_axi_w.wlast || (beats_left == 1)) begin
-                    // leftover는 chunk_count+1 <4일 수도 있고, 또는 chunk_count+1=4
-                    // 어쨌든 out_valid=1
-                    out_valid_reg <= 1'b1;
-                end
-            end
-        end
-    end
-
-    assign s_axi_w.wready = wready_r;
-
-    //--------------------------------------------------------------------------
-    // 4) 출력 계산
-    //--------------------------------------------------------------------------
-    //  - out_addr = awaddr_reg + chunk_offset
-    //  - out_length = chunk_count × 8 (DW) [beat당 32B=8DW]
-    //--------------------------------------------------------------------------
-    always_comb begin
-        // BDF 고정
-        out_bdf         = DEVICE_BDF;
-        // Write만 처리
-        out_is_memwrite = 1'b1;
-
-        // Address = Burst 시작 주소 + offset
-        out_addr  = awaddr_reg + chunk_offset;
-
-        // length(DW) = chunk_count × 8 (한 beat=32B=8DW)
-        out_length = (chunk_count == 0) ? 0 : (chunk_count * 8);
-
-        // chunk_buf[0..3]를 하나로 패킹 (256bit×4=1024bit)
-        out_wdata = {
-            chunk_buf[3],
-            chunk_buf[2],
-            chunk_buf[1],
-            chunk_buf[0]
-        };
-    end
-
-    assign out_valid = out_valid_reg;
+  // Read쪽 출력
+  assign out_r_addr   = araddr_reg;
+  assign out_r_length = arlen_reg + 1;    // burst 길이 = len + 1
+  assign out_r_valid  = ar_received;
 
 endmodule
