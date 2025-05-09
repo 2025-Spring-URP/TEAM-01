@@ -5,71 +5,39 @@ module FC_RX_Controller_Top (
     input  logic         clk,
     input  logic         rst_n,
 
-    // InitFC 입력 (초기 Credit 설정)
-    input  logic [7:0]   initfc_hdr_credit_i,
-    input  logic [11:0]   initfc_data_credit_i,
-    input  logic         initfc_valid_i,
+    // 외부 버퍼로부터 받은 credit 정보 (InitFC/UpdateFC)
+    input  logic [7:0]   buffer_hdr_credit_i,  // 수신 측 버퍼가 가지고 있던 저장 공간
+    input  logic [11:0]  buffer_data_credit_i, // 수신 측 버퍼가 가지고 있던 저장 공간
+    input  logic [7:0]   buffer_hdr_rsv_i,     // 수신 측 버퍼가 처리한 저장 공간
+    input  logic [11:0]  buffer_data_rsv_i,   // 수신 측 버퍼가 처리한 저장 공간
+    input  logic         is_initFC_i,
+    input  logic         is_updateFC_i,
+    input  logic [1:0]   type_credit_i,     // 2'b00: MWr, 2'b01: MRd, 2'b10: Cpl
 
-    // UpdateFC DLLP 송신을 위한 출력
-    output logic [7:0]   updatefc_hdr_credit_o,
-    output logic [11:0]   updatefc_data_credit_o,
-    output logic         updatefc_send_o,
-
-    // 수신된 TLP 입력
-    input  logic         rcv_tlp_valid_i,
-    input  logic [1:0]   rcv_tlp_type_i,    // 2'b00: MWr, 2'b01: MRd, 2'b10: Cpl
-    input  logic [7:0]   rcv_tlp_size_i,    // Payload 크기 (DW 단위)
-
-    // 수신한 TLP 처리 완료 신호
-    input  logic         tlp_processed_i
+    // 송신 측으로 전달하는 credit
+    output  logic [7:0]   hdr_credit_o,
+    output  logic [11:0]  data_credit_o,
+    output  logic         initfc_send_o,
+    output  logic         updatefc_send_o,
+    output  logic [1:0]   type_send_o       // 2'b00: MWr, 2'b01: MRd, 2'b10: Cpl
 );
 
-    //============================================================
-    // 내부 연결 신호 (wires)
-    //============================================================
-    logic [7:0] ca_hdr, ca_data;    // credit Allocator에서 할당된 header와 Data credit
-    logic [7:0] free_hdr_credit;    // buffer의 남은 header credit
-    logic [7:0] free_data_credit;   // buffer의 남은 data credit
-    logic       updatefc_trigger;   // Credit Allocator에서 UpdateFC를 요청하는 신호
-
-    //============================================================
-    // 서브모듈 인스턴스화
-    //============================================================
-
-    // 1. Receive Buffer 모듈
-    fc_rx_buffer u_fc_rx_buffer (
-        .clk                  (clk),
-        .rst_n                (rst_n),
-        .rx_tlp_valid_i       (rcv_tlp_valid_i),
-        .rx_tlp_type_i        (rcv_tlp_type_i),
-        .rx_tlp_size_i        (rcv_tlp_size_i),
-        .tlp_processed_i      (tlp_processed_i),
-        .free_hdr_credit_o    (free_hdr_credit),
-        .free_data_credit_o   (free_data_credit)
-    );
-
-    // 2. Credit Allocator 모듈
     fc_rx_credit_allocator u_fc_rx_credit_allocator (
-        .clk                  (clk),
-        .rst_n                (rst_n),
-        .initfc_hdr_credit_i   (initfc_hdr_credit_i),
-        .initfc_data_credit_i  (initfc_data_credit_i),
-        .initfc_valid_i        (initfc_valid_i),
-        .free_hdr_credit_i     (free_hdr_credit),
-        .free_data_credit_i    (free_data_credit),
-        .ca_hdr_o              (ca_hdr),
-        .ca_data_o             (ca_data),
-        .updatefc_trigger_o    (updatefc_trigger)
-    );
+        .clk                   (clk),
+        .rst_n                 (rst_n),
 
-    // 3. Link Packet Control 모듈
-    fc_rx_link_packet_ctrl u_fc_rx_link_packet_ctrl (
-        .ca_hdr_i              (ca_hdr),
-        .ca_data_i             (ca_data),
-        .updatefc_trigger_i    (updatefc_trigger),
-        .updatefc_hdr_credit_o (updatefc_hdr_credit_o),
-        .updatefc_data_credit_o(updatefc_data_credit_o),
-        .updatefc_send_o       (updatefc_send_o)
-    );
+        .buffer_hdr_credit_i    (buffer_hdr_credit_i),
+        .buffer_data_credit_i   (buffer_data_credit_i),
+        .buffer_hdr_rsv_i       (buffer_hdr_rsv_i),
+        .buffer_data_rsv_i      (buffer_data_rsv_i),
+        .is_initFC_i            (is_initFC_i),
+        .is_updateFC_i          (is_updateFC_i),
+        .type_credit_i          (type_credit_i),
 
+        .hdr_credit_o           (hdr_credit_o),
+        .data_credit_o          (data_credit_o),
+        .initfc_send_o          (initfc_send_o),
+        .updatefc_send_o        (updatefc_send_o),
+        .type_send_o            (type_send_o)
+    );
 endmodule
