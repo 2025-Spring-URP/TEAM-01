@@ -1,0 +1,968 @@
+FC_TX_Controller_Top_tb.sv
+
+5000: cl_ph=xx, cl_nph=xx, cl_cplh=xx, cl_pd=xxx, cl_cpld=xxx
+5000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+5000: state=xx, state_n=00
+5000: cc_ph=xx, cc_nph=xx, cc_cplh=xx, cc_pd=xxx, cc_cpld=xxx
+5000: state=xx, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+15000: cl_ph=00, cl_nph=00, cl_cplh=00, cl_pd=000, cl_cpld=000
+15000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+15000: state=00, state_n=00
+15000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+15000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+25000: cl_ph=00, cl_nph=00, cl_cplh=00, cl_pd=000, cl_cpld=000
+25000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=11
+25000: state=00, state_n=00
+25000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+25000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+35000: cl_ph=00, cl_nph=00, cl_cplh=00, cl_pd=000, cl_cpld=000
+35000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=00
+35000: state=00, state_n=01
+35000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+35000: state=00, state_n=10, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+45000: cl_ph=00, cl_nph=00, cl_cplh=00, cl_pd=000, cl_cpld=000
+45000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=00
+45000: state=01, state_n=00
+45000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+45000: state=10, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+55000: cl_ph=07, cl_nph=00, cl_cplh=00, cl_pd=00a, cl_cpld=000
+55000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=01
+55000: state=00, state_n=01
+55000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+55000: state=00, state_n=10, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+65000: cl_ph=07, cl_nph=00, cl_cplh=00, cl_pd=00a, cl_cpld=000
+65000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=01
+65000: state=01, state_n=00
+65000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+65000: state=10, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+75000: cl_ph=07, cl_nph=08, cl_cplh=00, cl_pd=00a, cl_cpld=000
+75000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=10
+75000: state=00, state_n=01
+75000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+75000: state=00, state_n=10, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+85000: cl_ph=07, cl_nph=08, cl_cplh=00, cl_pd=00a, cl_cpld=000
+85000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+85000: state=01, state_n=00
+85000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+85000: state=10, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[               95000] Step 1: InitFC 완료
+  cl_hdr = 0, cl_data = 0
+  cc_hdr = 0, cc_data = 0
+  required_hdr_credit = 0, required_data_credit = 0
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+95000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+95000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+95000: state=00, state_n=00
+95000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+95000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+105000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+105000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+105000: state=00, state_n=00
+105000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+105000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+[              115000] Step 2 - 1: MWr 요청
+  cl_hdr = 7, cl_data = 10
+  cc_hdr = 0, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 1
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+115000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+115000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+115000: state=00, state_n=00
+115000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+115000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+125000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+125000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+125000: state=00, state_n=00
+125000: cc_ph=00, cc_nph=00, cc_cplh=00, cc_pd=000, cc_cpld=000
+125000: state=01, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+[              135000] Step 2 - 2: MWr 요청
+  cl_hdr = 7, cl_data = 10
+  cc_hdr = 1, cc_data = 1
+  required_hdr_credit = 1, required_data_credit = 1
+  gating_pass = 1, send_tlp_grant = 1
+------------------------------------------------------------
+135000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+135000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+135000: state=00, state_n=00
+135000: cc_ph=01, cc_nph=00, cc_cplh=00, cc_pd=001, cc_cpld=000
+135000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+145000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+145000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+145000: state=00, state_n=00
+145000: cc_ph=01, cc_nph=00, cc_cplh=00, cc_pd=001, cc_cpld=000
+145000: state=01, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+[              155000] Step 2 - 3: MWr 요청
+  cl_hdr = 7, cl_data = 10
+  cc_hdr = 2, cc_data = 2
+  required_hdr_credit = 1, required_data_credit = 1
+  gating_pass = 1, send_tlp_grant = 1
+------------------------------------------------------------
+155000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+155000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+155000: state=00, state_n=00
+155000: cc_ph=02, cc_nph=00, cc_cplh=00, cc_pd=002, cc_cpld=000
+155000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+165000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+165000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+165000: state=00, state_n=00
+165000: cc_ph=02, cc_nph=00, cc_cplh=00, cc_pd=002, cc_cpld=000
+165000: state=01, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+[              175000] Step 2 - 4: MWr 요청
+  cl_hdr = 7, cl_data = 10
+  cc_hdr = 3, cc_data = 3
+  required_hdr_credit = 1, required_data_credit = 1
+  gating_pass = 1, send_tlp_grant = 1
+------------------------------------------------------------
+175000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+175000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+175000: state=00, state_n=00
+175000: cc_ph=03, cc_nph=00, cc_cplh=00, cc_pd=003, cc_cpld=000
+175000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+185000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+185000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+185000: state=00, state_n=00
+185000: cc_ph=03, cc_nph=00, cc_cplh=00, cc_pd=003, cc_cpld=000
+185000: state=01, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+[              195000] Step 2 - 5: MWr 요청
+  cl_hdr = 7, cl_data = 10
+  cc_hdr = 4, cc_data = 4
+  required_hdr_credit = 1, required_data_credit = 2
+  gating_pass = 1, send_tlp_grant = 1
+------------------------------------------------------------
+195000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+195000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+195000: state=00, state_n=00
+195000: cc_ph=04, cc_nph=00, cc_cplh=00, cc_pd=004, cc_cpld=000
+195000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+205000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+205000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+205000: state=00, state_n=00
+205000: cc_ph=04, cc_nph=00, cc_cplh=00, cc_pd=004, cc_cpld=000
+205000: state=01, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+[              215000] Step 2 - 6: MWr 요청
+  cl_hdr = 7, cl_data = 10
+  cc_hdr = 5, cc_data = 6
+  required_hdr_credit = 1, required_data_credit = 2
+  gating_pass = 1, send_tlp_grant = 1
+------------------------------------------------------------
+215000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+215000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+215000: state=00, state_n=00
+215000: cc_ph=05, cc_nph=00, cc_cplh=00, cc_pd=006, cc_cpld=000
+215000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+225000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+225000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+225000: state=00, state_n=00
+225000: cc_ph=05, cc_nph=00, cc_cplh=00, cc_pd=006, cc_cpld=000
+225000: state=01, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+[              235000] Step 2 - 7: MWr 요청
+  cl_hdr = 7, cl_data = 10
+  cc_hdr = 6, cc_data = 8
+  required_hdr_credit = 1, required_data_credit = 2
+  gating_pass = 1, send_tlp_grant = 1
+------------------------------------------------------------
+235000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+235000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+235000: state=00, state_n=00
+235000: cc_ph=06, cc_nph=00, cc_cplh=00, cc_pd=008, cc_cpld=000
+235000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+245000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+245000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+245000: state=00, state_n=00
+245000: cc_ph=06, cc_nph=00, cc_cplh=00, cc_pd=008, cc_cpld=000
+245000: state=01, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+[              255000] Step 2 - 8: MWr 요청
+  cl_hdr = 7, cl_data = 10
+  cc_hdr = 7, cc_data = 10
+  required_hdr_credit = 1, required_data_credit = 2
+  gating_pass = 0, send_tlp_grant = 1
+------------------------------------------------------------
+255000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+255000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+255000: state=00, state_n=00
+255000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+255000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+265000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+265000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+265000: state=00, state_n=00
+265000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+265000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=0
+----------------------------------------------------------
+[              275000] Step 2 - 9: MWr 요청
+  cl_hdr = 7, cl_data = 10
+  cc_hdr = 7, cc_data = 10
+  required_hdr_credit = 1, required_data_credit = 3
+  gating_pass = 0, send_tlp_grant = 0
+------------------------------------------------------------
+275000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+275000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+275000: state=00, state_n=00
+275000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+275000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+285000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+285000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+285000: state=00, state_n=00
+285000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+285000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=0
+----------------------------------------------------------
+[              295000] Step 2 - 10: MWr 요청
+  cl_hdr = 7, cl_data = 10
+  cc_hdr = 7, cc_data = 10
+  required_hdr_credit = 1, required_data_credit = 3
+  gating_pass = 0, send_tlp_grant = 0
+------------------------------------------------------------
+295000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+295000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+295000: state=00, state_n=00
+295000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+295000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+305000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+305000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=10
+305000: state=00, state_n=00
+305000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+305000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+315000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+315000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=00
+315000: state=00, state_n=10
+315000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+315000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+325000: cl_ph=07, cl_nph=08, cl_cplh=09, cl_pd=00a, cl_cpld=00c
+325000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=00
+325000: state=10, state_n=00
+325000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+325000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+[              335000] Step 3: UpdateFC 수행 (Header+10, Data+50)
+  cl_hdr = 17, cl_data = 60
+  cc_hdr = 7, cc_data = 10
+  required_hdr_credit = 1, required_data_credit = 3
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+335000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+335000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+335000: state=00, state_n=10
+335000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+335000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+345000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+345000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+345000: state=10, state_n=00
+345000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+345000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+355000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+355000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+355000: state=00, state_n=00
+355000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+355000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+365000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+365000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+365000: state=00, state_n=00
+365000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+365000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              375000] Step 4 - 1: MRd 요청
+  cl_hdr = 8, cl_data = 0
+  cc_hdr = 0, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 0
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+375000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+375000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+375000: state=00, state_n=00
+375000: cc_ph=07, cc_nph=00, cc_cplh=00, cc_pd=00a, cc_cpld=000
+375000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+385000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+385000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+385000: state=00, state_n=00
+385000: cc_ph=07, cc_nph=01, cc_cplh=00, cc_pd=00a, cc_cpld=000
+385000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+395000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+395000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+395000: state=00, state_n=00
+395000: cc_ph=07, cc_nph=01, cc_cplh=00, cc_pd=00a, cc_cpld=000
+395000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+405000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+405000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+405000: state=00, state_n=00
+405000: cc_ph=07, cc_nph=01, cc_cplh=00, cc_pd=00a, cc_cpld=000
+405000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              415000] Step 4 - 2: MRd 요청
+  cl_hdr = 8, cl_data = 0
+  cc_hdr = 1, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 0
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+415000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+415000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+415000: state=00, state_n=00
+415000: cc_ph=07, cc_nph=01, cc_cplh=00, cc_pd=00a, cc_cpld=000
+415000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+425000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+425000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+425000: state=00, state_n=00
+425000: cc_ph=07, cc_nph=02, cc_cplh=00, cc_pd=00a, cc_cpld=000
+425000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+435000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+435000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+435000: state=00, state_n=00
+435000: cc_ph=07, cc_nph=02, cc_cplh=00, cc_pd=00a, cc_cpld=000
+435000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+445000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+445000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+445000: state=00, state_n=00
+445000: cc_ph=07, cc_nph=02, cc_cplh=00, cc_pd=00a, cc_cpld=000
+445000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              455000] Step 4 - 3: MRd 요청
+  cl_hdr = 8, cl_data = 0
+  cc_hdr = 2, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 0
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+455000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+455000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+455000: state=00, state_n=00
+455000: cc_ph=07, cc_nph=02, cc_cplh=00, cc_pd=00a, cc_cpld=000
+455000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+465000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+465000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+465000: state=00, state_n=00
+465000: cc_ph=07, cc_nph=03, cc_cplh=00, cc_pd=00a, cc_cpld=000
+465000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+475000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+475000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+475000: state=00, state_n=00
+475000: cc_ph=07, cc_nph=03, cc_cplh=00, cc_pd=00a, cc_cpld=000
+475000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+485000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+485000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+485000: state=00, state_n=00
+485000: cc_ph=07, cc_nph=03, cc_cplh=00, cc_pd=00a, cc_cpld=000
+485000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              495000] Step 4 - 4: MRd 요청
+  cl_hdr = 8, cl_data = 0
+  cc_hdr = 3, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 0
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+495000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+495000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+495000: state=00, state_n=00
+495000: cc_ph=07, cc_nph=03, cc_cplh=00, cc_pd=00a, cc_cpld=000
+495000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+505000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+505000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+505000: state=00, state_n=00
+505000: cc_ph=07, cc_nph=04, cc_cplh=00, cc_pd=00a, cc_cpld=000
+505000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+515000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+515000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+515000: state=00, state_n=00
+515000: cc_ph=07, cc_nph=04, cc_cplh=00, cc_pd=00a, cc_cpld=000
+515000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+525000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+525000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+525000: state=00, state_n=00
+525000: cc_ph=07, cc_nph=04, cc_cplh=00, cc_pd=00a, cc_cpld=000
+525000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              535000] Step 4 - 5: MRd 요청
+  cl_hdr = 8, cl_data = 0
+  cc_hdr = 4, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 0
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+535000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+535000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+535000: state=00, state_n=00
+535000: cc_ph=07, cc_nph=04, cc_cplh=00, cc_pd=00a, cc_cpld=000
+535000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+545000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+545000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+545000: state=00, state_n=00
+545000: cc_ph=07, cc_nph=05, cc_cplh=00, cc_pd=00a, cc_cpld=000
+545000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+555000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+555000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+555000: state=00, state_n=00
+555000: cc_ph=07, cc_nph=05, cc_cplh=00, cc_pd=00a, cc_cpld=000
+555000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+565000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+565000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+565000: state=00, state_n=00
+565000: cc_ph=07, cc_nph=05, cc_cplh=00, cc_pd=00a, cc_cpld=000
+565000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              575000] Step 4 - 6: MRd 요청
+  cl_hdr = 8, cl_data = 0
+  cc_hdr = 5, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 0
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+575000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+575000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+575000: state=00, state_n=00
+575000: cc_ph=07, cc_nph=05, cc_cplh=00, cc_pd=00a, cc_cpld=000
+575000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+585000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+585000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+585000: state=00, state_n=00
+585000: cc_ph=07, cc_nph=06, cc_cplh=00, cc_pd=00a, cc_cpld=000
+585000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+595000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+595000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+595000: state=00, state_n=00
+595000: cc_ph=07, cc_nph=06, cc_cplh=00, cc_pd=00a, cc_cpld=000
+595000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+605000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+605000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+605000: state=00, state_n=00
+605000: cc_ph=07, cc_nph=06, cc_cplh=00, cc_pd=00a, cc_cpld=000
+605000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              615000] Step 4 - 7: MRd 요청
+  cl_hdr = 8, cl_data = 0
+  cc_hdr = 6, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 0
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+615000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+615000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+615000: state=00, state_n=00
+615000: cc_ph=07, cc_nph=06, cc_cplh=00, cc_pd=00a, cc_cpld=000
+615000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+625000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+625000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+625000: state=00, state_n=00
+625000: cc_ph=07, cc_nph=07, cc_cplh=00, cc_pd=00a, cc_cpld=000
+625000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+635000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+635000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+635000: state=00, state_n=00
+635000: cc_ph=07, cc_nph=07, cc_cplh=00, cc_pd=00a, cc_cpld=000
+635000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+645000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+645000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+645000: state=00, state_n=00
+645000: cc_ph=07, cc_nph=07, cc_cplh=00, cc_pd=00a, cc_cpld=000
+645000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              655000] Step 4 - 8: MRd 요청
+  cl_hdr = 8, cl_data = 0
+  cc_hdr = 7, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 0
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+655000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+655000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+655000: state=00, state_n=00
+655000: cc_ph=07, cc_nph=07, cc_cplh=00, cc_pd=00a, cc_cpld=000
+655000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+665000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+665000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+665000: state=00, state_n=00
+665000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+665000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+675000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+675000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+675000: state=00, state_n=00
+675000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+675000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=0
+----------------------------------------------------------
+685000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+685000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+685000: state=00, state_n=00
+685000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+685000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+[              695000] Step 4 - 9: MRd 요청
+  cl_hdr = 8, cl_data = 0
+  cc_hdr = 8, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 0
+  gating_pass = 0, send_tlp_grant = 0
+------------------------------------------------------------
+695000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+695000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+695000: state=00, state_n=00
+695000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+695000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+705000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+705000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+705000: state=00, state_n=00
+705000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+705000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+715000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+715000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+715000: state=00, state_n=00
+715000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+715000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=0
+----------------------------------------------------------
+725000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+725000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+725000: state=00, state_n=00
+725000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+725000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+[              735000] Step 4 - 10: MRd 요청
+  cl_hdr = 8, cl_data = 0
+  cc_hdr = 8, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 0
+  gating_pass = 0, send_tlp_grant = 0
+------------------------------------------------------------
+735000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+735000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+735000: state=00, state_n=00
+735000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+735000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+745000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+745000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=11
+745000: state=00, state_n=00
+745000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+745000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+755000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+755000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=01
+755000: state=00, state_n=10
+755000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+755000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+765000: cl_ph=11, cl_nph=08, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+765000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=01
+765000: state=10, state_n=00
+765000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+765000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+[              775000] Step 4: UpdateFC 수행 (Header+10, Data+50)
+  cl_hdr = 18, cl_data = 0
+  cc_hdr = 8, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 0
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+775000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+775000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+775000: state=00, state_n=10
+775000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+775000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+785000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+785000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+785000: state=10, state_n=00
+785000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+785000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+795000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+795000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+795000: state=00, state_n=00
+795000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+795000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+805000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+805000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+805000: state=00, state_n=00
+805000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+805000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              815000] Step 6 - 1: Cpl 요청
+  cl_hdr = 9, cl_data = 12
+  cc_hdr = 0, cc_data = 0
+  required_hdr_credit = 1, required_data_credit = 1
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+815000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+815000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+815000: state=00, state_n=00
+815000: cc_ph=07, cc_nph=08, cc_cplh=00, cc_pd=00a, cc_cpld=000
+815000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+825000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+825000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+825000: state=00, state_n=00
+825000: cc_ph=07, cc_nph=08, cc_cplh=01, cc_pd=00a, cc_cpld=001
+825000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+835000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+835000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+835000: state=00, state_n=00
+835000: cc_ph=07, cc_nph=08, cc_cplh=01, cc_pd=00a, cc_cpld=001
+835000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+845000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+845000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+845000: state=00, state_n=00
+845000: cc_ph=07, cc_nph=08, cc_cplh=01, cc_pd=00a, cc_cpld=001
+845000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              855000] Step 6 - 2: Cpl 요청
+  cl_hdr = 9, cl_data = 12
+  cc_hdr = 1, cc_data = 1
+  required_hdr_credit = 1, required_data_credit = 1
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+855000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+855000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+855000: state=00, state_n=00
+855000: cc_ph=07, cc_nph=08, cc_cplh=01, cc_pd=00a, cc_cpld=001
+855000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+865000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+865000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+865000: state=00, state_n=00
+865000: cc_ph=07, cc_nph=08, cc_cplh=02, cc_pd=00a, cc_cpld=002
+865000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+875000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+875000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+875000: state=00, state_n=00
+875000: cc_ph=07, cc_nph=08, cc_cplh=02, cc_pd=00a, cc_cpld=002
+875000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+885000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+885000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+885000: state=00, state_n=00
+885000: cc_ph=07, cc_nph=08, cc_cplh=02, cc_pd=00a, cc_cpld=002
+885000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              895000] Step 6 - 3: Cpl 요청
+  cl_hdr = 9, cl_data = 12
+  cc_hdr = 2, cc_data = 2
+  required_hdr_credit = 1, required_data_credit = 1
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+895000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+895000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+895000: state=00, state_n=00
+895000: cc_ph=07, cc_nph=08, cc_cplh=02, cc_pd=00a, cc_cpld=002
+895000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+905000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+905000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+905000: state=00, state_n=00
+905000: cc_ph=07, cc_nph=08, cc_cplh=03, cc_pd=00a, cc_cpld=003
+905000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+915000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+915000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+915000: state=00, state_n=00
+915000: cc_ph=07, cc_nph=08, cc_cplh=03, cc_pd=00a, cc_cpld=003
+915000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+925000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+925000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+925000: state=00, state_n=00
+925000: cc_ph=07, cc_nph=08, cc_cplh=03, cc_pd=00a, cc_cpld=003
+925000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              935000] Step 6 - 4: Cpl 요청
+  cl_hdr = 9, cl_data = 12
+  cc_hdr = 3, cc_data = 3
+  required_hdr_credit = 1, required_data_credit = 1
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+935000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+935000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+935000: state=00, state_n=00
+935000: cc_ph=07, cc_nph=08, cc_cplh=03, cc_pd=00a, cc_cpld=003
+935000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+945000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+945000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+945000: state=00, state_n=00
+945000: cc_ph=07, cc_nph=08, cc_cplh=04, cc_pd=00a, cc_cpld=004
+945000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+955000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+955000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+955000: state=00, state_n=00
+955000: cc_ph=07, cc_nph=08, cc_cplh=04, cc_pd=00a, cc_cpld=004
+955000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+965000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+965000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+965000: state=00, state_n=00
+965000: cc_ph=07, cc_nph=08, cc_cplh=04, cc_pd=00a, cc_cpld=004
+965000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[              975000] Step 6 - 5: Cpl 요청
+  cl_hdr = 9, cl_data = 12
+  cc_hdr = 4, cc_data = 4
+  required_hdr_credit = 1, required_data_credit = 2
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+975000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+975000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+975000: state=00, state_n=00
+975000: cc_ph=07, cc_nph=08, cc_cplh=04, cc_pd=00a, cc_cpld=004
+975000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+985000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+985000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+985000: state=00, state_n=00
+985000: cc_ph=07, cc_nph=08, cc_cplh=05, cc_pd=00a, cc_cpld=006
+985000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+995000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+995000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+995000: state=00, state_n=00
+995000: cc_ph=07, cc_nph=08, cc_cplh=05, cc_pd=00a, cc_cpld=006
+995000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+1005000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1005000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1005000: state=00, state_n=00
+1005000: cc_ph=07, cc_nph=08, cc_cplh=05, cc_pd=00a, cc_cpld=006
+1005000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[             1015000] Step 6 - 6: Cpl 요청
+  cl_hdr = 9, cl_data = 12
+  cc_hdr = 5, cc_data = 6
+  required_hdr_credit = 1, required_data_credit = 2
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+1015000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1015000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1015000: state=00, state_n=00
+1015000: cc_ph=07, cc_nph=08, cc_cplh=05, cc_pd=00a, cc_cpld=006
+1015000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+1025000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1025000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1025000: state=00, state_n=00
+1025000: cc_ph=07, cc_nph=08, cc_cplh=06, cc_pd=00a, cc_cpld=008
+1025000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+1035000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1035000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1035000: state=00, state_n=00
+1035000: cc_ph=07, cc_nph=08, cc_cplh=06, cc_pd=00a, cc_cpld=008
+1035000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+1045000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1045000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1045000: state=00, state_n=00
+1045000: cc_ph=07, cc_nph=08, cc_cplh=06, cc_pd=00a, cc_cpld=008
+1045000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[             1055000] Step 6 - 7: Cpl 요청
+  cl_hdr = 9, cl_data = 12
+  cc_hdr = 6, cc_data = 8
+  required_hdr_credit = 1, required_data_credit = 2
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+1055000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1055000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1055000: state=00, state_n=00
+1055000: cc_ph=07, cc_nph=08, cc_cplh=06, cc_pd=00a, cc_cpld=008
+1055000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+1065000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1065000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1065000: state=00, state_n=00
+1065000: cc_ph=07, cc_nph=08, cc_cplh=07, cc_pd=00a, cc_cpld=00a
+1065000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+1075000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1075000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1075000: state=00, state_n=00
+1075000: cc_ph=07, cc_nph=08, cc_cplh=07, cc_pd=00a, cc_cpld=00a
+1075000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=1
+----------------------------------------------------------
+1085000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1085000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1085000: state=00, state_n=00
+1085000: cc_ph=07, cc_nph=08, cc_cplh=07, cc_pd=00a, cc_cpld=00a
+1085000: state=00, state_n=01, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+[             1095000] Step 6 - 8: Cpl 요청
+  cl_hdr = 9, cl_data = 12
+  cc_hdr = 7, cc_data = 10
+  required_hdr_credit = 1, required_data_credit = 2
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+1095000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1095000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1095000: state=00, state_n=00
+1095000: cc_ph=07, cc_nph=08, cc_cplh=07, cc_pd=00a, cc_cpld=00a
+1095000: state=01, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+1105000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1105000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1105000: state=00, state_n=00
+1105000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1105000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+1115000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1115000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1115000: state=00, state_n=00
+1115000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1115000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=0
+----------------------------------------------------------
+1125000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1125000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1125000: state=00, state_n=00
+1125000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1125000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+[             1135000] Step 6 - 9: Cpl 요청
+  cl_hdr = 9, cl_data = 12
+  cc_hdr = 8, cc_data = 12
+  required_hdr_credit = 1, required_data_credit = 3
+  gating_pass = 0, send_tlp_grant = 0
+------------------------------------------------------------
+1135000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1135000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1135000: state=00, state_n=00
+1135000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1135000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+1145000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1145000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1145000: state=00, state_n=00
+1145000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1145000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+1155000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1155000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1155000: state=00, state_n=00
+1155000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1155000: state=00, state_n=00, send_tlp_req_i=1, gating_pass_i=0
+----------------------------------------------------------
+1165000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1165000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1165000: state=00, state_n=00
+1165000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1165000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+[             1175000] Step 6 - 10: Cpl 요청
+  cl_hdr = 9, cl_data = 12
+  cc_hdr = 8, cc_data = 12
+  required_hdr_credit = 1, required_data_credit = 3
+  gating_pass = 0, send_tlp_grant = 0
+------------------------------------------------------------
+1175000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1175000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1175000: state=00, state_n=00
+1175000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1175000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+1185000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1185000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=11
+1185000: state=00, state_n=00
+1185000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1185000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+1195000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1195000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=10
+1195000: state=00, state_n=10
+1195000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1195000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+1205000: cl_ph=11, cl_nph=12, cl_cplh=09, cl_pd=03c, cl_cpld=00c
+1205000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=10
+1205000: state=10, state_n=00
+1205000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1205000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=0
+----------------------------------------------------------
+[             1215000] Step 7: UpdateFC 수행 (Header+10, Data+50)
+  cl_hdr = 19, cl_data = 62
+  cc_hdr = 8, cc_data = 12
+  required_hdr_credit = 1, required_data_credit = 3
+  gating_pass = 1, send_tlp_grant = 0
+------------------------------------------------------------
+1215000: cl_ph=11, cl_nph=12, cl_cplh=13, cl_pd=03c, cl_cpld=03e
+1215000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1215000: state=00, state_n=10
+1215000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1215000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+1225000: cl_ph=11, cl_nph=12, cl_cplh=13, cl_pd=03c, cl_cpld=03e
+1225000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1225000: state=10, state_n=00
+1225000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1225000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+1235000: cl_ph=11, cl_nph=12, cl_cplh=13, cl_pd=03c, cl_cpld=03e
+1235000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1235000: state=00, state_n=00
+1235000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1235000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+1245000: cl_ph=11, cl_nph=12, cl_cplh=13, cl_pd=03c, cl_cpld=03e
+1245000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1245000: state=00, state_n=00
+1245000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1245000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+1255000: cl_ph=11, cl_nph=12, cl_cplh=13, cl_pd=03c, cl_cpld=03e
+1255000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=11
+1255000: state=00, state_n=00
+1255000: cc_ph=07, cc_nph=08, cc_cplh=08, cc_pd=00a, cc_cpld=00c
+1255000: state=00, state_n=00, send_tlp_req_i=0, gating_pass_i=1
+----------------------------------------------------------
+$finish called from file "/home/urp04/fc_controller/fc_control_tx/SIM/..//SIM/TB/FC_TX_Controller_Top_tb.sv", line 496.
+$finish at simulation time              1265000
+           V C S   S i m u l a t i o n   R e p o r t
+Time: 1265000 ps
+CPU Time:      0.170 seconds;       Data structure size:   0.0Mb
+Tue May  6 18:02:53 2025

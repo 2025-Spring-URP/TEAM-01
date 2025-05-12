@@ -1,0 +1,446 @@
+FC_TX_Controller_Top_tb.sv
+
+5000: ca_ph=  x, ca_nph=  x, ca_cplh=  x, ca_pd=   x, ca_cpld=   x
+5000: ca_ph_n=  0, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n=   0, ca_cpld_n=   0
+5000: buffer_hdr_credit_i=  0, buffer_data_credit_i=   0
+5000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+5000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=xx
+5000: state=xx, state_n=00
+-------------------------------------------------------------
+15000: ca_ph=  0, ca_nph=  0, ca_cplh=  0, ca_pd=   0, ca_cpld=   0
+15000: ca_ph_n=  0, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n=   0, ca_cpld_n=   0
+15000: buffer_hdr_credit_i=  0, buffer_data_credit_i=   0
+15000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+15000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=xx
+15000: state=00, state_n=00
+-------------------------------------------------------------
+25000: ca_ph=  0, ca_nph=  0, ca_cplh=  0, ca_pd=   0, ca_cpld=   0
+25000: ca_ph_n=  0, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n=   0, ca_cpld_n=   0
+25000: buffer_hdr_credit_i=  0, buffer_data_credit_i=   0
+25000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+25000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=xx
+25000: state=00, state_n=00
+-------------------------------------------------------------
+35000: ca_ph=  0, ca_nph=  0, ca_cplh=  0, ca_pd=   0, ca_cpld=   0
+35000: ca_ph_n=  0, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n=   0, ca_cpld_n=   0
+35000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+35000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+35000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=00
+35000: state=00, state_n=01
+-------------------------------------------------------------
+45000: ca_ph=  0, ca_nph=  0, ca_cplh=  0, ca_pd=   0, ca_cpld=   0
+45000: ca_ph_n= 20, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 300, ca_cpld_n=   0
+45000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+45000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+45000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=00
+45000: state=01, state_n=00
+-------------------------------------------------------------
+               55000: Step 1: InitFC 수행
+  ca_ph = 20, ca_nph = 0, ca_cplh = 0, ca_pd = 300, ca_cpld= 0
+  hdr_credit_o = 20, data_credit_o = 300
+  initfc_send_o = 1, updatefc_send_o = 0
+------------------------------------------------------------
+55000: ca_ph= 20, ca_nph=  0, ca_cplh=  0, ca_pd= 300, ca_cpld=   0
+55000: ca_ph_n= 20, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 300, ca_cpld_n=   0
+55000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+55000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+55000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=00
+55000: state=00, state_n=01
+-------------------------------------------------------------
+65000: ca_ph= 20, ca_nph=  0, ca_cplh=  0, ca_pd= 300, ca_cpld=   0
+65000: ca_ph_n= 20, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 300, ca_cpld_n=   0
+65000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+65000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+65000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=00
+65000: state=01, state_n=00
+-------------------------------------------------------------
+75000: ca_ph= 20, ca_nph=  0, ca_cplh=  0, ca_pd= 300, ca_cpld=   0
+75000: ca_ph_n= 20, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 300, ca_cpld_n=   0
+75000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+75000: buffer_hdr_rsv_i=  5, buffer_data_rsv_i=  50
+75000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=00
+75000: state=00, state_n=10
+-------------------------------------------------------------
+85000: ca_ph= 20, ca_nph=  0, ca_cplh=  0, ca_pd= 300, ca_cpld=   0
+85000: ca_ph_n= 25, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 350, ca_cpld_n=   0
+85000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+85000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+85000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=00
+85000: state=10, state_n=00
+-------------------------------------------------------------
+               95000: Step 2: UpdateFC 수행 (+5, +50)
+  ca_ph = 25, ca_nph = 0, ca_cplh = 0, ca_pd = 350, ca_cpld= 0
+  hdr_credit_o = 25, data_credit_o = 350
+  initfc_send_o = 0, updatefc_send_o = 1
+------------------------------------------------------------
+95000: ca_ph= 25, ca_nph=  0, ca_cplh=  0, ca_pd= 350, ca_cpld=   0
+95000: ca_ph_n= 25, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 350, ca_cpld_n=   0
+95000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+95000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+95000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=00
+95000: state=00, state_n=10
+-------------------------------------------------------------
+105000: ca_ph= 25, ca_nph=  0, ca_cplh=  0, ca_pd= 350, ca_cpld=   0
+105000: ca_ph_n= 25, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 350, ca_cpld_n=   0
+105000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+105000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+105000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=00
+105000: state=10, state_n=00
+-------------------------------------------------------------
+115000: ca_ph= 25, ca_nph=  0, ca_cplh=  0, ca_pd= 350, ca_cpld=   0
+115000: ca_ph_n= 25, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 350, ca_cpld_n=   0
+115000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+115000: buffer_hdr_rsv_i= 10, buffer_data_rsv_i= 100
+115000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=00
+115000: state=00, state_n=10
+-------------------------------------------------------------
+125000: ca_ph= 25, ca_nph=  0, ca_cplh=  0, ca_pd= 350, ca_cpld=   0
+125000: ca_ph_n= 35, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 450, ca_cpld_n=   0
+125000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+125000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+125000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=00
+125000: state=10, state_n=00
+-------------------------------------------------------------
+              135000: Step 3: UpdateFC 수행 (+10, +100)
+  ca_ph = 35, ca_nph = 0, ca_cplh = 0, ca_pd = 450, ca_cpld= 0
+  hdr_credit_o = 35, data_credit_o = 450
+  initfc_send_o = 0, updatefc_send_o = 1
+------------------------------------------------------------
+135000: ca_ph= 35, ca_nph=  0, ca_cplh=  0, ca_pd= 450, ca_cpld=   0
+135000: ca_ph_n= 35, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 450, ca_cpld_n=   0
+135000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+135000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+135000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=00
+135000: state=00, state_n=10
+-------------------------------------------------------------
+145000: ca_ph= 35, ca_nph=  0, ca_cplh=  0, ca_pd= 450, ca_cpld=   0
+145000: ca_ph_n= 35, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 450, ca_cpld_n=   0
+145000: buffer_hdr_credit_i= 20, buffer_data_credit_i= 300
+145000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+145000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=00
+145000: state=10, state_n=00
+-------------------------------------------------------------
+155000: ca_ph= 35, ca_nph=  0, ca_cplh=  0, ca_pd= 450, ca_cpld=   0
+155000: ca_ph_n= 35, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n= 450, ca_cpld_n=   0
+155000: buffer_hdr_credit_i=  7, buffer_data_credit_i=  80
+155000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+155000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=00
+155000: state=00, state_n=01
+-------------------------------------------------------------
+165000: ca_ph= 35, ca_nph=  0, ca_cplh=  0, ca_pd= 450, ca_cpld=   0
+165000: ca_ph_n=  7, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+165000: buffer_hdr_credit_i=  7, buffer_data_credit_i=  80
+165000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+165000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=00
+165000: state=01, state_n=00
+-------------------------------------------------------------
+              175000: Step 4: InitFC 수행 (다시 초기화)
+  ca_ph = 7, ca_nph = 0, ca_cplh = 0, ca_pd = 80, ca_cpld= 0
+  hdr_credit_o = 7, data_credit_o = 80
+  initfc_send_o = 1, updatefc_send_o = 0
+------------------------------------------------------------
+175000: ca_ph=  7, ca_nph=  0, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+175000: ca_ph_n=  7, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+175000: buffer_hdr_credit_i=  7, buffer_data_credit_i=  80
+175000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+175000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=00
+175000: state=00, state_n=01
+-------------------------------------------------------------
+185000: ca_ph=  7, ca_nph=  0, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+185000: ca_ph_n=  7, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+185000: buffer_hdr_credit_i=  7, buffer_data_credit_i=  80
+185000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+185000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=00
+185000: state=01, state_n=00
+-------------------------------------------------------------
+195000: ca_ph=  7, ca_nph=  0, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+195000: ca_ph_n=  7, ca_nph_n=  0, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+195000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+195000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+195000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=01
+195000: state=00, state_n=01
+-------------------------------------------------------------
+205000: ca_ph=  7, ca_nph=  0, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+205000: ca_ph_n=  7, ca_nph_n= 21, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+205000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+205000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+205000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=01
+205000: state=01, state_n=00
+-------------------------------------------------------------
+              215000: Step 5: InitFC 수행
+  ca_ph = 7, ca_nph = 21, ca_cplh = 0, ca_pd = 80, ca_cpld= 0
+  hdr_credit_o = 21, data_credit_o = 0
+  initfc_send_o = 1, updatefc_send_o = 0
+------------------------------------------------------------
+215000: ca_ph=  7, ca_nph= 21, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+215000: ca_ph_n=  7, ca_nph_n= 21, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+215000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+215000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+215000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=01
+215000: state=00, state_n=01
+-------------------------------------------------------------
+225000: ca_ph=  7, ca_nph= 21, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+225000: ca_ph_n=  7, ca_nph_n= 21, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+225000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+225000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+225000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=01
+225000: state=01, state_n=00
+-------------------------------------------------------------
+235000: ca_ph=  7, ca_nph= 21, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+235000: ca_ph_n=  7, ca_nph_n= 21, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+235000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+235000: buffer_hdr_rsv_i=  6, buffer_data_rsv_i=  60
+235000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=01
+235000: state=00, state_n=10
+-------------------------------------------------------------
+245000: ca_ph=  7, ca_nph= 21, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+245000: ca_ph_n=  7, ca_nph_n= 27, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+245000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+245000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+245000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=01
+245000: state=10, state_n=00
+-------------------------------------------------------------
+              255000: Step 6: UpdateFC 수행 (+5, +50)
+  ca_ph = 7, ca_nph = 27, ca_cplh = 0, ca_pd = 80, ca_cpld= 0
+  hdr_credit_o = 27, data_credit_o = 0
+  initfc_send_o = 0, updatefc_send_o = 1
+------------------------------------------------------------
+255000: ca_ph=  7, ca_nph= 27, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+255000: ca_ph_n=  7, ca_nph_n= 27, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+255000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+255000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+255000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=01
+255000: state=00, state_n=10
+-------------------------------------------------------------
+265000: ca_ph=  7, ca_nph= 27, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+265000: ca_ph_n=  7, ca_nph_n= 27, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+265000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+265000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+265000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=01
+265000: state=10, state_n=00
+-------------------------------------------------------------
+275000: ca_ph=  7, ca_nph= 27, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+275000: ca_ph_n=  7, ca_nph_n= 27, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+275000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+275000: buffer_hdr_rsv_i= 20, buffer_data_rsv_i= 200
+275000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=01
+275000: state=00, state_n=10
+-------------------------------------------------------------
+285000: ca_ph=  7, ca_nph= 27, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+285000: ca_ph_n=  7, ca_nph_n= 47, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+285000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+285000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+285000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=01
+285000: state=10, state_n=00
+-------------------------------------------------------------
+              295000: Step 7: UpdateFC 수행 (+10, +100)
+  ca_ph = 7, ca_nph = 47, ca_cplh = 0, ca_pd = 80, ca_cpld= 0
+  hdr_credit_o = 47, data_credit_o = 0
+  initfc_send_o = 0, updatefc_send_o = 1
+------------------------------------------------------------
+295000: ca_ph=  7, ca_nph= 47, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+295000: ca_ph_n=  7, ca_nph_n= 47, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+295000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+295000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+295000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=01
+295000: state=00, state_n=10
+-------------------------------------------------------------
+305000: ca_ph=  7, ca_nph= 47, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+305000: ca_ph_n=  7, ca_nph_n= 47, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+305000: buffer_hdr_credit_i= 21, buffer_data_credit_i= 310
+305000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+305000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=01
+305000: state=10, state_n=00
+-------------------------------------------------------------
+315000: ca_ph=  7, ca_nph= 47, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+315000: ca_ph_n=  7, ca_nph_n= 47, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+315000: buffer_hdr_credit_i=  8, buffer_data_credit_i=  90
+315000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+315000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=01
+315000: state=00, state_n=01
+-------------------------------------------------------------
+325000: ca_ph=  7, ca_nph= 47, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+325000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+325000: buffer_hdr_credit_i=  8, buffer_data_credit_i=  90
+325000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+325000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=01
+325000: state=01, state_n=00
+-------------------------------------------------------------
+              335000: Step 8: InitFC 수행 (다시 초기화)
+  ca_ph = 7, ca_nph = 8, ca_cplh = 0, ca_pd = 80, ca_cpld= 0
+  hdr_credit_o = 8, data_credit_o = 0
+  initfc_send_o = 1, updatefc_send_o = 0
+------------------------------------------------------------
+335000: ca_ph=  7, ca_nph=  8, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+335000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+335000: buffer_hdr_credit_i=  8, buffer_data_credit_i=  90
+335000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+335000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=01
+335000: state=00, state_n=01
+-------------------------------------------------------------
+345000: ca_ph=  7, ca_nph=  8, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+345000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+345000: buffer_hdr_credit_i=  8, buffer_data_credit_i=  90
+345000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+345000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=01
+345000: state=01, state_n=00
+-------------------------------------------------------------
+355000: ca_ph=  7, ca_nph=  8, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+355000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n=  0, ca_pd_n=  80, ca_cpld_n=   0
+355000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+355000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+355000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=10
+355000: state=00, state_n=01
+-------------------------------------------------------------
+365000: ca_ph=  7, ca_nph=  8, ca_cplh=  0, ca_pd=  80, ca_cpld=   0
+365000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 22, ca_pd_n=  80, ca_cpld_n= 320
+365000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+365000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+365000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=10
+365000: state=01, state_n=00
+-------------------------------------------------------------
+              375000: Step 9: InitFC 수행
+  ca_ph = 7, ca_nph = 8, ca_cplh = 22, ca_pd = 80, ca_cpld= 320
+  hdr_credit_o = 22, data_credit_o = 320
+  initfc_send_o = 1, updatefc_send_o = 0
+------------------------------------------------------------
+375000: ca_ph=  7, ca_nph=  8, ca_cplh= 22, ca_pd=  80, ca_cpld= 320
+375000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 22, ca_pd_n=  80, ca_cpld_n= 320
+375000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+375000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+375000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+375000: state=00, state_n=01
+-------------------------------------------------------------
+385000: ca_ph=  7, ca_nph=  8, ca_cplh= 22, ca_pd=  80, ca_cpld= 320
+385000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 22, ca_pd_n=  80, ca_cpld_n= 320
+385000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+385000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+385000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=10
+385000: state=01, state_n=00
+-------------------------------------------------------------
+395000: ca_ph=  7, ca_nph=  8, ca_cplh= 22, ca_pd=  80, ca_cpld= 320
+395000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 22, ca_pd_n=  80, ca_cpld_n= 320
+395000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+395000: buffer_hdr_rsv_i=  7, buffer_data_rsv_i=  70
+395000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=10
+395000: state=00, state_n=10
+-------------------------------------------------------------
+405000: ca_ph=  7, ca_nph=  8, ca_cplh= 22, ca_pd=  80, ca_cpld= 320
+405000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 29, ca_pd_n=  80, ca_cpld_n= 390
+405000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+405000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+405000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=10
+405000: state=10, state_n=00
+-------------------------------------------------------------
+              415000: Step 10: UpdateFC 수행 (+5, +50)
+  ca_ph = 7, ca_nph = 8, ca_cplh = 29, ca_pd = 80, ca_cpld= 390
+  hdr_credit_o = 29, data_credit_o = 390
+  initfc_send_o = 0, updatefc_send_o = 1
+------------------------------------------------------------
+415000: ca_ph=  7, ca_nph=  8, ca_cplh= 29, ca_pd=  80, ca_cpld= 390
+415000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 29, ca_pd_n=  80, ca_cpld_n= 390
+415000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+415000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+415000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+415000: state=00, state_n=10
+-------------------------------------------------------------
+425000: ca_ph=  7, ca_nph=  8, ca_cplh= 29, ca_pd=  80, ca_cpld= 390
+425000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 29, ca_pd_n=  80, ca_cpld_n= 390
+425000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+425000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+425000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=10
+425000: state=10, state_n=00
+-------------------------------------------------------------
+435000: ca_ph=  7, ca_nph=  8, ca_cplh= 29, ca_pd=  80, ca_cpld= 390
+435000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 29, ca_pd_n=  80, ca_cpld_n= 390
+435000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+435000: buffer_hdr_rsv_i= 30, buffer_data_rsv_i= 300
+435000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=10
+435000: state=00, state_n=10
+-------------------------------------------------------------
+445000: ca_ph=  7, ca_nph=  8, ca_cplh= 29, ca_pd=  80, ca_cpld= 390
+445000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 59, ca_pd_n=  80, ca_cpld_n= 690
+445000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+445000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+445000: is_initFC_i=0, is_updateFC_i=1, type_credit_i=10
+445000: state=10, state_n=00
+-------------------------------------------------------------
+              455000: Step 11: UpdateFC 수행 (+10, +100)
+  ca_ph = 7, ca_nph = 8, ca_cplh = 59, ca_pd = 80, ca_cpld= 690
+  hdr_credit_o = 59, data_credit_o = 690
+  initfc_send_o = 0, updatefc_send_o = 1
+------------------------------------------------------------
+455000: ca_ph=  7, ca_nph=  8, ca_cplh= 59, ca_pd=  80, ca_cpld= 690
+455000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 59, ca_pd_n=  80, ca_cpld_n= 690
+455000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+455000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+455000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+455000: state=00, state_n=10
+-------------------------------------------------------------
+465000: ca_ph=  7, ca_nph=  8, ca_cplh= 59, ca_pd=  80, ca_cpld= 690
+465000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 59, ca_pd_n=  80, ca_cpld_n= 690
+465000: buffer_hdr_credit_i= 22, buffer_data_credit_i= 320
+465000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+465000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=10
+465000: state=10, state_n=00
+-------------------------------------------------------------
+475000: ca_ph=  7, ca_nph=  8, ca_cplh= 59, ca_pd=  80, ca_cpld= 690
+475000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n= 59, ca_pd_n=  80, ca_cpld_n= 690
+475000: buffer_hdr_credit_i=  9, buffer_data_credit_i= 100
+475000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+475000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=10
+475000: state=00, state_n=01
+-------------------------------------------------------------
+485000: ca_ph=  7, ca_nph=  8, ca_cplh= 59, ca_pd=  80, ca_cpld= 690
+485000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n=  9, ca_pd_n=  80, ca_cpld_n= 100
+485000: buffer_hdr_credit_i=  9, buffer_data_credit_i= 100
+485000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+485000: is_initFC_i=1, is_updateFC_i=0, type_credit_i=10
+485000: state=01, state_n=00
+-------------------------------------------------------------
+              495000: Step 12: InitFC 수행 (다시 초기화)
+  ca_ph = 7, ca_nph = 8, ca_cplh = 9, ca_pd = 80, ca_cpld= 100
+  hdr_credit_o = 9, data_credit_o = 100
+  initfc_send_o = 1, updatefc_send_o = 0
+------------------------------------------------------------
+495000: ca_ph=  7, ca_nph=  8, ca_cplh=  9, ca_pd=  80, ca_cpld= 100
+495000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n=  9, ca_pd_n=  80, ca_cpld_n= 100
+495000: buffer_hdr_credit_i=  9, buffer_data_credit_i= 100
+495000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+495000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+495000: state=00, state_n=01
+-------------------------------------------------------------
+505000: ca_ph=  7, ca_nph=  8, ca_cplh=  9, ca_pd=  80, ca_cpld= 100
+505000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n=  9, ca_pd_n=  80, ca_cpld_n= 100
+505000: buffer_hdr_credit_i=  9, buffer_data_credit_i= 100
+505000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+505000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+505000: state=01, state_n=00
+-------------------------------------------------------------
+515000: ca_ph=  7, ca_nph=  8, ca_cplh=  9, ca_pd=  80, ca_cpld= 100
+515000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n=  9, ca_pd_n=  80, ca_cpld_n= 100
+515000: buffer_hdr_credit_i=  9, buffer_data_credit_i= 100
+515000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+515000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+515000: state=00, state_n=00
+-------------------------------------------------------------
+525000: ca_ph=  7, ca_nph=  8, ca_cplh=  9, ca_pd=  80, ca_cpld= 100
+525000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n=  9, ca_pd_n=  80, ca_cpld_n= 100
+525000: buffer_hdr_credit_i=  9, buffer_data_credit_i= 100
+525000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+525000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+525000: state=00, state_n=00
+-------------------------------------------------------------
+535000: ca_ph=  7, ca_nph=  8, ca_cplh=  9, ca_pd=  80, ca_cpld= 100
+535000: ca_ph_n=  7, ca_nph_n=  8, ca_cplh_n=  9, ca_pd_n=  80, ca_cpld_n= 100
+535000: buffer_hdr_credit_i=  9, buffer_data_credit_i= 100
+535000: buffer_hdr_rsv_i=  0, buffer_data_rsv_i=   0
+535000: is_initFC_i=0, is_updateFC_i=0, type_credit_i=10
+535000: state=00, state_n=00
+-------------------------------------------------------------
+$finish called from file "/home/urp04/fc_controller/fc_control_rx/SIM/..//SIM/TB/FC_RX_Controller_Top_tb.sv", line 264.
+$finish at simulation time               545000
+           V C S   S i m u l a t i o n   R e p o r t
+Time: 545000 ps
+CPU Time:      0.160 seconds;       Data structure size:   0.0Mb
+Tue May  6 17:59:45 2025
