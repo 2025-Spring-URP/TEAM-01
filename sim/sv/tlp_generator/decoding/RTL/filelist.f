@@ -1,2 +1,0 @@
--sverilog $LAB_PATH/RTL/axi4_interface.sv
--sverilog $LAB_PATH/RTL/dummy_axi4_if_decoding.sv
