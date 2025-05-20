@@ -1,12 +1,6 @@
 `timescale 1ns/1ps
 
-`include "PCIE_PKG.svh"
-`include "SAL_FIFO.sv"
-`include "aw_header_maker.sv"
-`include "ar_header_maker.sv"
-`include "payload_handler.sv"
-
-// `include "tlp_assembler.sv"    // 후속 작업 예정
+import PCIE_PKG::*;
 
 module pcie_tx_top (
     input  wire                  clk,
