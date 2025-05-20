@@ -2,7 +2,7 @@
 
 import PCIE_PKG::*;
 
-module pcie_tx_top (
+module PCIE_TOP_WRAPPER (
     input  wire                  clk,
     input  wire                  rst_n,
 
