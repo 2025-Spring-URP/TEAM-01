@@ -10,28 +10,30 @@ module dll_tx_tlp (
     input  logic         tlp_valid_i,
 
     // PHY 출력
-    output logic [135:0] dllp_o,
-    output logic         dllp_valid_o
+    output logic [135:0] pipe_txdata_o,
+    output logic         pipe_txvalid_o
 );
 
     localparam DLC_DL_ACTIVE = 2'b11;
 
     logic is_active;
+    logic [135:0] pipe_txdata;
+    logic pipe_txvalid;
+
     assign is_active = (dlc_state_i == DLC_DL_ACTIVE);
 
-    logic [135:0] dllp_data;
-
     always_comb begin
-        dllp_data       = 136'd0;
-        dllp_valid_o    = 1'b0;
+        pipe_txdata     = 136'd0;
+        pipe_txvalid    = 1'b0;
 
         if (is_active && tlp_valid_i) begin
-            dllp_data[135:8] = tlp_i;         // 128비트 TLP
-            dllp_data[7:0]   = 8'h00;         // CRC (dummy)
-            dllp_valid_o     = 1'b1;
+            pipe_txdata[135:8] = tlp_i;         // 128비트 TLP
+            pipe_txdata[7:0]   = 8'h00;         // CRC (dummy)
+            pipe_txvalid       = 1'b1;
         end
     end
 
-    assign dllp_o = dllp_data;
+    assign pipe_txdata_o = pipe_txdata;
+    assign pipe_txvalid_o = pipe_txvalid;
 
 endmodule

@@ -25,6 +25,7 @@ module dll_tx_arbiter (
             tx_data_o[1195:0] = tlp_i;
             tx_valid_o = 1'b1;
         end
+        $display("[%t] ARBITER: %h, %b", $time, tx_data_o, tx_valid_o);
     end
 
 endmodule

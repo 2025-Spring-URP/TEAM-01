@@ -88,6 +88,7 @@ module dll_tx_dllp_generator (
                 state_n = IDLE;
             end
         endcase
+        $display("[%t] DLLP_GEN: %h, %b", $time, dll_dllp_o, dll_dllp_valid_o);
     end
 
     assign dll_dllp_o = dllp;

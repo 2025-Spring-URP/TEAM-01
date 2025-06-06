@@ -65,6 +65,7 @@ module dll_tx_tlp_generator (
                 state_n = IDLE;
             end
         endcase
+        $display("[%t] TLP_GEN: %h, %b", $time, dll_tlp_o, dll_tlp_valid_o);
     end
 
     assign dll_tlp_o = dll_tlp;

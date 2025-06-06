@@ -126,7 +126,7 @@ module data_link_layer_active_tb;
         send_rx_dllp(48'hBEEF_8C_02_77_33); #20;
 
         // RX TLP test (CRC = lower 32b, seq = 0)
-        send_rx_tlp({12'd0,   {1152{1'b0}}, 32'hDEADBEEF}); #20;
+        send_rx_tlp({12'd1,   {1152{1'b0}}, 32'hDEADBEEF}); #20;
         send_rx_tlp({12'd1,   {1152{1'b1}}, 32'hDEADBEEF}); #20;
         send_rx_tlp({12'd2,   {576{1'b0}}, {576{1'b1}}, 32'hDEADBEEF}); #20;
 
@@ -137,8 +137,8 @@ module data_link_layer_active_tb;
 
         // TX TLP generator test
         send_tx_tlp({1152{1'b0}}); #20;
-        send_tx_tlp({576{1'b1}, 576{1'b0}}); #20;
-        send_tx_tlp({288{1'b1}, 576{1'b0}, 288{1'b1}}); #20;
+        send_tx_tlp({ {576{1'b1}}, {576{1'b0}} }); #20;
+        send_tx_tlp({ {288{1'b1}}, {576{1'b0}}, {288{1'b1}} }); #20;
 
         #100;
 

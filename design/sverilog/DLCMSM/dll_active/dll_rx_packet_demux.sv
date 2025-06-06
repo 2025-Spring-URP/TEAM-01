@@ -31,5 +31,6 @@ module dll_rx_packet_demux (
                 tlp_valid_o  = 1'b1;
             end
         end
+        $display("[%t] DEMUX: %h, %b, %h, %b", $time, tlp_o, tlp_valid_o, dllp_o, dllp_valid_o);
     end
 endmodule
